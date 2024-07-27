@@ -1,0 +1,31 @@
+{
+  "data": [
+    {"id": 1,
+      "name": "Dr. John Smith",
+      "subjects": ["Introduction to Teaching", "Classroom Management"],
+      "image": "https://picsum.photos/id/1/200/300"
+
+    },
+    {"id": 2, "name": "Prof. Jane Doe", "subjects": ["Educational Psychology", "Curriculum Development"], "image": "https://picsum.photos/id/2/200/300"
+      },
+    {"id": 3, "name": "Dr. Emily Johnson", "subjects": ["Assessment and Evaluation", "Instructional Strategies"], "image": "https://picsum.photos/id/3/200/300"},
+    {"id": 4, "name": "Prof. Michael Brown", "subjects": ["Special Education", "Technology in Education"], "image": "https://picsum.photos/id/4/200/300"},
+    {"id": 5, "name": "Dr. Sarah Davis", "subjects": ["Introduction to Teaching", "Educational Psychology"], "image": "https://picsum.photos/id/5/200/300"},
+    {"id": 6, "name": "Prof. David Wilson", "subjects": ["Classroom Management", "Curriculum Development"], "image": "https://picsum.photos/id/6/200/300"},
+    {"id": 7, "name": "Dr. Laura Moore", "subjects": ["Assessment and Evaluation", "Special Education"], "image": "https://picsum.photos/id/7/200/300"},
+    {"id": 8, "name": "Prof. Robert Taylor", "subjects": ["Instructional Strategies", "Technology in Education"], "image": "https://picsum.photos/id/8/200/300"},
+    {"id": 9, "name": "Dr. Susan Anderson", "subjects": ["Introduction to Teaching", "Special Education"], "image": "https://picsum.photos/id/9/200/300"},
+    {"id": 10, "name": "Prof. Mark Jackson", "subjects": ["Classroom Management", "Technology in Education"], "image": "https://picsum.photos/id/10/200/300"},
+    {"id": 11, "name": "Dr. Karen White", "subjects": ["Educational Psychology", "Assessment and Evaluation"], "image": "https://picsum.photos/id/11/200/300"},
+    {"id": 12, "name": "Prof. Charles Harris", "subjects": ["Curriculum Development", "Instructional Strategies"], "image": "https://picsum.photos/id/12/200/300"},
+    {"id": 13, "name": "Dr. Jessica Martin", "subjects": ["Special Education", "Technology in Education"], "image": "https://picsum.photos/id/13/200/300"},
+    {"id": 14, "name": "Prof. Thomas Thompson", "subjects": ["Introduction to Teaching", "Educational Psychology"], "image": "https://picsum.photos/id/14/200/300"},
+    {"id": 15, "name": "Dr. Patricia Martinez", "subjects": ["Classroom Management", "Curriculum Development"], "image": "https://picsum.photos/id/15/200/300"},
+    {"id": 16, "name": "Prof. Christopher Lee", "subjects": ["Assessment and Evaluation", "Instructional Strategies"], "image": "https://picsum.photos/id/16/200/300"},
+    {"id": 17, "name": "Dr. Barbara White", "subjects": ["Special Education", "Technology in Education"], "image": "https://picsum.photos/id/17/200/300"},
+    {"id": 18, "name": "Prof. Daniel Clark", "subjects": ["Introduction to Teaching", "Classroom Management"], "image": "https://picsum.photos/id/18/200/300"},
+    {"id": 19, "name": "Dr. Steven Lewis", "subjects": ["Educational Psychology", "Curriculum Development"], "image": "https://picsum.photos/id/19/200/300"},
+    {"id": 20, "name": "Prof. Betty Walker", "subjects": ["Assessment and Evaluation", "Instructional Strategies"], "image": "https://picsum.photos/id/20/200/300"}
+
+  ]
+}
