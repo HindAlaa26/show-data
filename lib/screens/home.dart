@@ -24,10 +24,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initList() async {
-    setState(() {
-      isLoading = true;
-      print(isLoading);
-    });
     var result = await rootBundle.loadString('assets/data.json');
     var response = jsonDecode(result);
     instructors = List<Instructor>.from(
@@ -36,10 +32,6 @@ class _HomePageState extends State<HomePage> {
     for (var instructor in instructors) {
       rateNotifiers[instructor.id] = ValueNotifier(0);
     }
-    setState(() {
-      isLoading = false;
-      print(isLoading);
-    });
   }
 
   @override
@@ -52,51 +44,44 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Colors.amber,
-              ),
-            )
-          : ListView(
-              children: instructors
-                  .map((instructor) => Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.shade500, spreadRadius: 3)
-                            ]),
-                        padding: const EdgeInsets.all(6),
-                        margin: const EdgeInsets.all(10),
-                        child: ListTile(
-                          leading: Container(
-                            height: 100,
-                            width: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(35),
-                                image: DecorationImage(
-                                    image: NetworkImage(instructor.image),
-                                    fit: BoxFit.fill)),
-                          ),
-                          title: Text(instructor.name),
-                          subtitle: Text(
-                              "${instructor.subjects[0]} , ${instructor.subjects[1]}"),
-                          trailing: likes(rateNotifiers[instructor.id]!),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ShowDataScreen(
-                                    instructor: instructor,
-                                  ),
-                                ));
-                          },
-                        ),
-                      ))
-                  .toList(),
-            ),
+      body: ListView(
+        children: instructors
+            .map((instructor) => Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey.shade500, spreadRadius: 3)
+                      ]),
+                  padding: const EdgeInsets.all(6),
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Container(
+                      height: 100,
+                      width: 80,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(35),
+                          image: DecorationImage(
+                              image: NetworkImage(instructor.image),
+                              fit: BoxFit.fill)),
+                    ),
+                    title: Text(instructor.name),
+                    subtitle: Text(
+                        "${instructor.subjects[0]} , ${instructor.subjects[1]}"),
+                    trailing: likes(rateNotifiers[instructor.id]!),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShowDataScreen(
+                              instructor: instructor,
+                            ),
+                          ));
+                    },
+                  ),
+                ))
+            .toList(),
+      ),
     );
   }
 }

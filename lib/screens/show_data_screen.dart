@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:show_data/screens/home.dart';
 import '../models/instructor.dart';
 
-class ShowDataScreen extends StatefulWidget {
+class ShowDataScreen extends StatelessWidget {
   final Instructor instructor;
-  ShowDataScreen({super.key, required this.instructor});
-
-  @override
-  State<ShowDataScreen> createState() => _ShowDataScreenState();
-}
-
-class _ShowDataScreenState extends State<ShowDataScreen> {
+  const ShowDataScreen({super.key, required this.instructor});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +15,13 @@ class _ShowDataScreenState extends State<ShowDataScreen> {
           CircleAvatar(
             radius: 100,
             backgroundColor: Colors.blueGrey,
-            backgroundImage: NetworkImage(widget.instructor.image),
+            backgroundImage: NetworkImage(instructor.image),
           ),
           const SizedBox(
             height: 25,
           ),
           Text(
-            widget.instructor.name,
+            instructor.name,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
@@ -39,7 +33,7 @@ class _ShowDataScreenState extends State<ShowDataScreen> {
             child: Row(
               children: [
                 Text(
-                  'Instructor name : ${widget.instructor.name}',
+                  'Instructor name : ${instructor.name}',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -61,13 +55,13 @@ class _ShowDataScreenState extends State<ShowDataScreen> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '1. ${widget.instructor.subjects[0]}',
+                  '1. ${instructor.subjects[0]}',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '2. ${widget.instructor.subjects[1]}',
+                  '2. ${instructor.subjects[1]}',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -75,13 +69,13 @@ class _ShowDataScreenState extends State<ShowDataScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             margin: const EdgeInsets.all(50),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.blueGrey)),
             child: ValueListenableBuilder(
-              valueListenable: rateNotifiers[widget.instructor.id]!,
+              valueListenable: rateNotifiers[instructor.id]!,
               builder: (context, value, _) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
