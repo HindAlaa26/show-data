@@ -1,6 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:show_data/bloc/instructor_bloc.dart';
+import 'package:show_data/bloc/instructor_event.dart';
+import 'package:show_data/bloc/instructor_states.dart';
 import 'package:show_data/models/instructor.dart';
 import 'package:show_data/screens/show_data_screen.dart';
 
@@ -14,21 +16,13 @@ class HomePage extends StatefulWidget {
 Map<int, ValueNotifier<int>> rateNotifiers = {};
 
 class _HomePageState extends State<HomePage> {
-  List<Instructor> instructors = [];
-  bool isLoading = false;
-
   @override
   void initState() {
-    initList();
     super.initState();
+    context.read<InstructorBloc>().add(LoadInstructorEvent());
   }
 
-  void initList() async {
-    var result = await rootBundle.loadString('assets/data.json');
-    var response = jsonDecode(result);
-    instructors = List<Instructor>.from(
-        response['data'].map((e) => Instructor.fromJson(e)).toList());
-
+  void initList(List<Instructor> instructors) {
     for (var instructor in instructors) {
       rateNotifiers[instructor.id] = ValueNotifier(0);
     }
@@ -37,16 +31,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Instructors Data",
-          style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+        appBar: AppBar(
+          title: const Text(
+            "Instructors Data",
+            style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: ListView(
-        children: instructors
-            .map((instructor) => Container(
+        body: BlocBuilder<InstructorBloc, InstructorState>(
+          builder: (context, state) {
+            if (state is InstructorLoadingState) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Colors.amber,
+              ));
+            }
+            if (state is InstructorLoadedState) {
+              initList(state.instructors);
+              return ListView.builder(
+                itemCount: state.instructors.length,
+                itemBuilder: (context, index) => Container(
                   decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(5),
@@ -62,27 +66,35 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(35),
                           image: DecorationImage(
-                              image: NetworkImage(instructor.image),
+                              image:
+                                  NetworkImage(state.instructors[index].image),
                               fit: BoxFit.fill)),
                     ),
-                    title: Text(instructor.name),
+                    title: Text(state.instructors[index].name),
                     subtitle: Text(
-                        "${instructor.subjects[0]} , ${instructor.subjects[1]}"),
-                    trailing: likes(rateNotifiers[instructor.id]!),
+                        "${state.instructors[index].subjects[0]} , ${state.instructors[index].subjects[1]}"),
+                    trailing:
+                        likes(rateNotifiers[state.instructors[index].id]!),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ShowDataScreen(
-                              instructor: instructor,
+                              instructor: state.instructors[index],
                             ),
                           ));
                     },
                   ),
-                ))
-            .toList(),
-      ),
-    );
+                ),
+              );
+            }
+            if (state is InstructorErrorState) {
+              print(state.error);
+              return Center(child: Text("Instructors: ${state.error}"));
+            }
+            return const SizedBox.shrink();
+          },
+        ));
   }
 }
 

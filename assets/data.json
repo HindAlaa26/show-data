@@ -1,5 +1,5 @@
-{
-  "data": [
+[
+
     {"id": 1,
       "name": "Dr. John Smith",
       "subjects": ["Introduction to Teaching", "Classroom Management"],
@@ -27,5 +27,5 @@
     {"id": 19, "name": "Dr. Steven Lewis", "subjects": ["Educational Psychology", "Curriculum Development"], "image": "https://picsum.photos/id/19/200/300"},
     {"id": 20, "name": "Prof. Betty Walker", "subjects": ["Assessment and Evaluation", "Instructional Strategies"], "image": "https://picsum.photos/id/20/200/300"}
 
-  ]
-}
+
+]
