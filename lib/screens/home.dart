@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:show_data/bloc/instructor_bloc.dart';
 import 'package:show_data/bloc/instructor_event.dart';
 import 'package:show_data/bloc/instructor_states.dart';
-import 'package:show_data/models/instructor.dart';
 import 'package:show_data/screens/show_data_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,19 +12,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-Map<int, ValueNotifier<int>> rateNotifiers = {};
-
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
     context.read<InstructorBloc>().add(LoadInstructorEvent());
-  }
-
-  void initList(List<Instructor> instructors) {
-    for (var instructor in instructors) {
-      rateNotifiers[instructor.id] = ValueNotifier(0);
-    }
   }
 
   @override
@@ -47,7 +38,6 @@ class _HomePageState extends State<HomePage> {
               ));
             }
             if (state is InstructorLoadedState) {
-              initList(state.instructors);
               return ListView.builder(
                 itemCount: state.instructors.length,
                 itemBuilder: (context, index) => Container(
@@ -73,8 +63,8 @@ class _HomePageState extends State<HomePage> {
                     title: Text(state.instructors[index].name),
                     subtitle: Text(
                         "${state.instructors[index].subjects[0]} , ${state.instructors[index].subjects[1]}"),
-                    trailing:
-                        likes(rateNotifiers[state.instructors[index].id]!),
+                    trailing: likes(
+                        state.rateNotifiers[state.instructors[index].id]!),
                     onTap: () {
                       Navigator.push(
                           context,
